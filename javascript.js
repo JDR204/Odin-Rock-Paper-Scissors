@@ -9,7 +9,7 @@ function getComputerChoice() {
         return "Scissors";
     }
 }
-// function plays a round of RPS and determins a winner
+// function plays a round of RPS and determines a winner
 function round(playerSelection, computerSelection) {
     playerSelection = playerSelection.toLowerCase();
     computerSelection = computerSelection.toLowerCase();
@@ -35,3 +35,37 @@ function round(playerSelection, computerSelection) {
             }
     }
 }
+// function plays 5 round games of RPS and prints results
+function game() {   
+    let wins = 0;
+    let losses = 0;
+    let rounds = 0;
+    let draws = 0;
+    for (let i = 0; i < 5; i++) {
+        let userInput = prompt("Rock, Paper, or Scissors?");
+        let computerInput = getComputerChoice();
+        console.log("You chose " + userInput + ". Computer chose " + computerInput + ".");
+        let results = round(userInput, computerInput);
+        if (results == "Draw") {
+            console.log(results);
+            draws++;
+        }   else if (results.indexOf("Win") !== -1) {
+                console.log(results);
+                wins++;
+        }   else if (results.indexOf("Lose") !== -1) {
+                console.log(results);
+                losses++;
+        }   
+        rounds++;
+        console.log("Round: " + rounds + "\n" + "User Wins: " + wins + "\nComputer Wins: " + losses + "\nDraws: " + draws + "\n\n");
+    }
+    if (wins > losses) {
+        console.log("You win!")
+    }   else if (losses > wins) {
+            console.log("Computer Wins!");
+    }   else {
+            console.log("Draw Game")
+    }
+}
+
+console.log(game());
