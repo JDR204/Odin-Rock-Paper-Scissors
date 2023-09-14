@@ -14,7 +14,7 @@ function round(playerSelection, computerSelection) {
     playerSelection = playerSelection.toLowerCase();
     computerSelection = computerSelection.toLowerCase();
     if (playerSelection === computerSelection) {
-        return "Draw";
+       return "Draw";
     }   else if (playerSelection === "paper") {
             if (computerSelection === "rock") {
                 return "You Win! Paper beats Rock";
@@ -25,7 +25,7 @@ function round(playerSelection, computerSelection) {
             if (computerSelection === "paper") {
                 return "You Lose! Paper beats Rock";
             }   else if (computerSelection === "scissors") {
-                    return "You Win! Rock beats Scissors";
+                   return "You Win! Rock beats Scissors";
             }
     }   else if (playerSelection === "scissors") {
             if (computerSelection === "paper") {
@@ -57,7 +57,8 @@ function game() {
                 losses++;
         }   
         rounds++;
-        console.log("Round: " + rounds + "\n" + "User Wins: " + wins + "\nComputer Wins: " + losses + "\nDraws: " + draws + "\n\n");
+        console.log("Round: " + rounds + "\n" + "User Wins: " + wins + "\nComputer Wins: " +
+                     losses + "\nDraws: " + draws + "\n\n");
     }
     if (wins > losses) {
         console.log("You win!")
@@ -68,4 +69,42 @@ function game() {
     }
 }
 
-console.log(game());
+const resultsContainer = document.querySelector(".results");
+
+const rockButton = document.querySelector("#rock");
+rockButton.addEventListener("click", e => {
+    const matchResult = round(e.target.id, getComputerChoice())
+    console.log(matchResult);
+    resultsContainer.textContent = matchResult;
+});
+
+const paperButton = document.querySelector("#paper");
+paperButton.addEventListener("click", e => {
+    const matchResult = round(e.target.id, getComputerChoice())
+    console.log(matchResult);
+    resultsContainer.textContent = matchResult;
+});
+
+const scissorsButton = document.querySelector("#scissors");
+scissorsButton.addEventListener("click", e => {
+    const matchResult = round(e.target.id, getComputerChoice())
+    console.log(matchResult);
+    resultsContainer.textContent = matchResult;
+});
+
+const allButtons = document.querySelectorAll(".buttons button");
+const runningScore = document.querySelector(".runningScore");
+let totalClicks = 0;
+allButtons.forEach(button => {   
+    button.addEventListener("click", e => {
+        totalClicks += 1;
+        if (totalClicks == 5) {
+            allButtons.forEach(button => {
+               button.disabled = true; 
+            });
+            runningScore.textContent = "Game over.";
+        }
+        console.log(totalClicks);
+    });
+});
+
